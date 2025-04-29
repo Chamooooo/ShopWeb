@@ -90,6 +90,12 @@ li span {
   gap: 0.2rem;
 }
 
+#contador {
+  margin: 10px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 /* Botones pequeños en la lista */
 li button {
   background-color: #28a745;

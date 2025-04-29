@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form');
   const input = document.getElementById('producto');
   const toggleThemeButton = document.getElementById('toggle-theme');
-  const contador = document.getElementById('contador');
   let productos = JSON.parse(localStorage.getItem('productos')) || [];
 
   render();
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let nombre = input.value.trim();
     if (nombre) {
       nombre = capitalizarPrimeraLetra(nombre);
-      productos.push({ nombre, comprado: false });
+      productos.push({ nombre, comprado: false, cantidad: 1 });
       input.value = '';
       guardar();
       render();
@@ -22,20 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function render() {
     lista.innerHTML = '';
+    productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
     productos.forEach((p, i) => {
       const li = document.createElement('li');
       li.className = p.comprado ? 'comprado' : '';
       li.innerHTML = `
         <span>${p.nombre}</span>
-        <div class="botones">
+        <div class="botones">     
           <button onclick="toggle(${i})">✅</button>
           <button onclick="eliminar(${i})">❌</button>
         </div>
       `;
       lista.appendChild(li);
     });
-
-    actualizarContador();
   }
 
   function guardar() {
@@ -50,18 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
     productos[index].comprado = !productos[index].comprado;
     guardar();
     render();
-  }
+  };
 
   window.eliminar = (index) => {
     productos.splice(index, 1);
     guardar();
     render();
-  }
-
-  function actualizarContador(){
-    const comprados = productos.filter(p => p.comprado).length;
-    contador.textContent = `${comprados} de ${productos.length} productos comprados`;
-  }
+  };
 
   // Cambio de tema
   toggleThemeButton.addEventListener('click', () => {
