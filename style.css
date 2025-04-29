@@ -86,7 +86,7 @@ li span {
 /* Agrupar los botones */
 .botones {
   display: flex;
-  gap: 0.3rem;
+  gap: 0.1rem;
 }
 
 /* Botones pequeños en la lista */

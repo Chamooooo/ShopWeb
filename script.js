@@ -18,19 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  function render() {
-    lista.innerHTML = '';
-    productos.forEach((p, i) => {
-      const li = document.createElement('li');
-      li.className = p.comprado ? 'comprado' : '';
-      li.innerHTML = `
-        <span>${p.nombre}</span>
+function render() {
+  lista.innerHTML = '';
+  productos.forEach((p, i) => {
+    const li = document.createElement('li');
+    li.className = p.comprado ? 'comprado' : '';
+    li.innerHTML = `
+      <span>${p.nombre}</span>
+      <div class="botones">
         <button onclick="toggle(${i})">✅</button>
         <button onclick="eliminar(${i})">❌</button>
-      `;
-      lista.appendChild(li);
-    });
-  }
+      </div>
+    `;
+    lista.appendChild(li);
+  });
+}
 
   function guardar() {
     localStorage.setItem('productos', JSON.stringify(productos));
