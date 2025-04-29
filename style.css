@@ -76,6 +76,7 @@ li.comprado {
   text-decoration: line-through;
   color: gray;
   background: #e0e0e0;
+  opacity: 0.7;
 }
 
 li span {
@@ -113,6 +114,11 @@ li button:last-child:hover {
 /* Modo Claro */
 body.light-mode {
   background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Modo Claro */
+body.light-mode li.comprado{
   color: #333;
 }
 
@@ -154,16 +160,4 @@ body.dark-mode li {
 
 #toggle-theme:hover {
   background-color: #000000;
-}
-
-.sortable-chosen {
-  background-color: #ffeeba; /* color al arrastrar */
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: all 0.2s ease;
-}
-
-.sortable-ghost {
-  opacity: 0.5;
-  background-color: #cce5ff;
 }

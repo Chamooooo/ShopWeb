@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form');
   const input = document.getElementById('producto');
   const toggleThemeButton = document.getElementById('toggle-theme');
+  const contador = document.getElementById('contador');
   let productos = JSON.parse(localStorage.getItem('productos')) || [];
 
   render();
@@ -24,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     productos.forEach((p, i) => {
       const li = document.createElement('li');
       li.className = p.comprado ? 'comprado' : '';
-      li.setAttribute('data-nombre', p.nombre); // para referenciar al reordenar
       li.innerHTML = `
         <span>${p.nombre}</span>
         <div class="botones">
@@ -35,16 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lista.appendChild(li);
     });
 
-    // Reiniciar Sortable en cada render
-    new Sortable(lista, {
-      animation: 200,
-      easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
-      onEnd(evt) {
-        const nuevoOrden = [...lista.children].map(li => li.getAttribute('data-nombre'));
-        productos.sort((a, b) => nuevoOrden.indexOf(a.nombre) - nuevoOrden.indexOf(b.nombre));
-        guardar();
-      }
-    });
+    actualizarContador();
   }
 
   function guardar() {
@@ -65,6 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     productos.splice(index, 1);
     guardar();
     render();
+  }
+
+  function actualizarContador(){
+    const comprados = productos.filter(p => p.comprado).length;
+    contador.textContent = `${comprados} de ${productos.length} productos comprados`;
   }
 
   // Cambio de tema
