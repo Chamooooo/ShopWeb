@@ -155,3 +155,15 @@ body.dark-mode li {
 #toggle-theme:hover {
   background-color: #000000;
 }
+
+.sortable-chosen {
+  background-color: #ffeeba; /* color al arrastrar */
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.sortable-ghost {
+  opacity: 0.5;
+  background-color: #cce5ff;
+}
